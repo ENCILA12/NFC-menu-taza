@@ -16,11 +16,79 @@ $gallery_items = json_decode(file_get_contents($gallery_file), true) ?: [];
 
 $message = '';
 
-// Handle Mode Toggle
+// Handle Mode & Background Theme Settings
 if (isset($_POST['update_mode'])) {
     $config['mode'] = $_POST['menu_mode'];
     file_put_contents($config_file, json_encode($config, JSON_PRETTY_PRINT));
     $message = "Menu mode updated successfully.";
+}
+
+if (isset($_POST['update_theme'])) {
+    if (isset($_POST['body_bg_color'])) {
+        $config['body_bg_color'] = trim($_POST['body_bg_color']);
+    }
+    if (isset($_POST['hero_bg_color'])) {
+        $config['hero_bg_color'] = trim($_POST['hero_bg_color']);
+    }
+    if (isset($_POST['footer_bg_color'])) {
+        $config['footer_bg_color'] = trim($_POST['footer_bg_color']);
+    }
+
+    // Hero BG Image Upload
+    if (isset($_FILES['hero_bg_image']) && $_FILES['hero_bg_image']['error'] === UPLOAD_ERR_OK) {
+        $ext = pathinfo($_FILES['hero_bg_image']['name'], PATHINFO_EXTENSION);
+        $fileName = 'hero_bg_' . time() . '.' . $ext;
+        if (move_uploaded_file($_FILES['hero_bg_image']['tmp_name'], __DIR__ . '/assets/images/' . $fileName)) {
+            $config['hero_bg_image'] = 'assets/images/' . $fileName;
+        }
+    }
+    if (isset($_POST['remove_hero_bg_image']) && $_POST['remove_hero_bg_image'] == '1') {
+        $config['hero_bg_image'] = '';
+    }
+
+    // Footer BG Image Upload (Baba)
+    if (isset($_FILES['footer_bg_image']) && $_FILES['footer_bg_image']['error'] === UPLOAD_ERR_OK) {
+        $ext = pathinfo($_FILES['footer_bg_image']['name'], PATHINFO_EXTENSION);
+        $fileName = 'footer_bg_' . time() . '.' . $ext;
+        if (move_uploaded_file($_FILES['footer_bg_image']['tmp_name'], __DIR__ . '/assets/images/' . $fileName)) {
+            $config['footer_bg_image'] = 'assets/images/' . $fileName;
+        }
+    }
+    if (isset($_POST['remove_footer_bg_image']) && $_POST['remove_footer_bg_image'] == '1') {
+        $config['footer_bg_image'] = '';
+    }
+
+    // Body BG Image Upload
+    if (isset($_FILES['body_bg_image']) && $_FILES['body_bg_image']['error'] === UPLOAD_ERR_OK) {
+        $ext = pathinfo($_FILES['body_bg_image']['name'], PATHINFO_EXTENSION);
+        $fileName = 'body_bg_' . time() . '.' . $ext;
+        if (move_uploaded_file($_FILES['body_bg_image']['tmp_name'], __DIR__ . '/assets/images/' . $fileName)) {
+            $config['body_bg_image'] = 'assets/images/' . $fileName;
+        }
+    }
+    if (isset($_POST['remove_body_bg_image']) && $_POST['remove_body_bg_image'] == '1') {
+        $config['body_bg_image'] = '';
+    }
+
+    if (isset($_POST['body_bg_fit'])) {
+        $config['body_bg_fit'] = trim($_POST['body_bg_fit']);
+    }
+
+    file_put_contents($config_file, json_encode($config, JSON_PRETTY_PRINT));
+    $message = "Background and appearance settings saved successfully.";
+}
+
+// Handle One-Click Reset to Plain White Theme
+if (isset($_POST['reset_white_theme'])) {
+    $config['body_bg_color'] = '#FFFFFF';
+    $config['body_bg_image'] = '';
+    $config['hero_bg_color'] = '#8C5F4D';
+    $config['hero_bg_image'] = '';
+    $config['footer_bg_color'] = '#FFFFFF';
+    $config['footer_bg_image'] = '';
+    $config['body_bg_fit'] = 'cover';
+    file_put_contents($config_file, json_encode($config, JSON_PRETTY_PRINT));
+    $message = "Menu appearance has been reset to Plain White Theme successfully.";
 }
 
 // Handle Delete Product
@@ -153,11 +221,134 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_gallery'])) {
                 <div class="form-group">
                     <label>Choose how customers will see your menu:</label>
                     <select name="menu_mode">
-                        <option value="static" <?= $config['mode'] === 'static' ? 'selected' : '' ?>>Mode A: Static Image Gallery (Original Menu Pictures)</option>
-                        <option value="interactive" <?= $config['mode'] === 'interactive' ? 'selected' : '' ?>>Mode B: Interactive Grid (Individual Configured Products)</option>
+                        <option value="static" <?= ($config['mode'] ?? 'static') === 'static' ? 'selected' : '' ?>>Mode A: Static Image Gallery (Original Menu Pictures)</option>
+                        <option value="interactive" <?= ($config['mode'] ?? 'static') === 'interactive' ? 'selected' : '' ?>>Mode B: Interactive Grid (Individual Configured Products)</option>
                     </select>
                 </div>
                 <button type="submit" name="update_mode" class="btn btn-primary">Save Settings</button>
+            </form>
+        </div>
+
+        <!-- Background & Appearance Settings -->
+        <div class="card">
+            <h2>🎨 Background & Appearance (All Devices & Mobile Responsive)</h2>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="flex-row" style="margin-bottom: 1.5rem;">
+                    
+                    <!-- Hero Header Settings -->
+                    <div style="background: #fdfaf8; border: 1px solid #eaded7; border-radius: 12px; padding: 1.2rem;">
+                        <h3 style="margin-top:0; color: var(--primary-color); font-size: 1.1rem; display:flex; align-items:center; gap:8px;">
+                            <i class="ph ph-image"></i> Top Hero Header Background
+                        </h3>
+                        
+                        <div class="form-group">
+                            <label>Hero Background Color:</label>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <input type="color" name="hero_bg_color" value="<?= htmlspecialchars($config['hero_bg_color'] ?? '#8C5F4D') ?>" style="width:50px; height:42px; padding:2px; cursor:pointer;">
+                                <input type="text" id="hero_color_text" value="<?= htmlspecialchars($config['hero_bg_color'] ?? '#8C5F4D') ?>" onchange="document.querySelector('input[name=hero_bg_color]').value = this.value;" style="flex:1;">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hero Background Image (Cover):</label>
+                            <input type="file" name="hero_bg_image" accept="image/*">
+                        </div>
+
+                        <?php if (!empty($config['hero_bg_image']) && file_exists(__DIR__ . '/' . $config['hero_bg_image'])): ?>
+                            <div style="margin: 0.8rem 0; padding: 0.6rem; background: white; border-radius: 8px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <img src="<?= htmlspecialchars($config['hero_bg_image']) ?>" style="width: 55px; height: 35px; object-fit: cover; border-radius: 6px;">
+                                    <span style="font-size:0.85rem; color:#555;">Current Image</span>
+                                </div>
+                                <label style="font-size: 0.85rem; color: #d9534f; cursor:pointer; display:flex; align-items:center; gap:4px; margin-bottom:0;">
+                                    <input type="checkbox" name="remove_hero_bg_image" value="1" style="width:auto;"> Remove
+                                </label>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Bottom Footer Settings -->
+                    <div style="background: #fdfaf8; border: 1px solid #eaded7; border-radius: 12px; padding: 1.2rem;">
+                        <h3 style="margin-top:0; color: var(--primary-color); font-size: 1.1rem; display:flex; align-items:center; gap:8px;">
+                            <i class="ph ph-anchor"></i> Bottom Footer Background
+                        </h3>
+
+                        <div class="form-group">
+                            <label>Footer Background Color:</label>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <input type="color" name="footer_bg_color" value="<?= htmlspecialchars($config['footer_bg_color'] ?? '#F3EDE8') ?>" style="width:50px; height:42px; padding:2px; cursor:pointer;">
+                                <input type="text" id="footer_color_text" value="<?= htmlspecialchars($config['footer_bg_color'] ?? '#F3EDE8') ?>" onchange="document.querySelector('input[name=footer_bg_color]').value = this.value;" style="flex:1;">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Footer Background Image (Cover/Repeat):</label>
+                            <input type="file" name="footer_bg_image" accept="image/*">
+                        </div>
+
+                        <?php if (!empty($config['footer_bg_image']) && file_exists(__DIR__ . '/' . $config['footer_bg_image'])): ?>
+                            <div style="margin: 0.8rem 0; padding: 0.6rem; background: white; border-radius: 8px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <img src="<?= htmlspecialchars($config['footer_bg_image']) ?>" style="width: 55px; height: 35px; object-fit: cover; border-radius: 6px;">
+                                    <span style="font-size:0.85rem; color:#555;">Current Image</span>
+                                </div>
+                                <label style="font-size: 0.85rem; color: #d9534f; cursor:pointer; display:flex; align-items:center; gap:4px; margin-bottom:0;">
+                                    <input type="checkbox" name="remove_footer_bg_image" value="1" style="width:auto;"> Remove
+                                </label>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Whole Page / Body Settings -->
+                    <div style="background: #fdfaf8; border: 1px solid #eaded7; border-radius: 12px; padding: 1.2rem;">
+                        <h3 style="margin-top:0; color: var(--primary-color); font-size: 1.1rem; display:flex; align-items:center; gap:8px;">
+                            <i class="ph ph-paint-brush"></i> Whole Page Background
+                        </h3>
+
+                        <div class="form-group">
+                            <label>Page Background Color:</label>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <input type="color" name="body_bg_color" value="<?= htmlspecialchars($config['body_bg_color'] ?? '#FAFAFA') ?>" style="width:50px; height:42px; padding:2px; cursor:pointer;">
+                                <input type="text" id="body_color_text" value="<?= htmlspecialchars($config['body_bg_color'] ?? '#FAFAFA') ?>" onchange="document.querySelector('input[name=body_bg_color]').value = this.value;" style="flex:1;">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Page Background Image / Pattern:</label>
+                            <input type="file" name="body_bg_image" accept="image/*">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Background Image Fit (CP & Desktop):</label>
+                            <select name="body_bg_fit">
+                                <option value="cover" <?= ($config['body_bg_fit'] ?? 'cover') === 'cover' ? 'selected' : '' ?>>Auto-Fit Full Screen (Cover - Sakto & walang puwang)</option>
+                                <option value="contain" <?= ($config['body_bg_fit'] ?? '') === 'contain' ? 'selected' : '' ?>>Contain (Buong picture kita, walang putol)</option>
+                                <option value="repeat" <?= ($config['body_bg_fit'] ?? '') === 'repeat' ? 'selected' : '' ?>>Tile Pattern (Repeat Seamlessly)</option>
+                            </select>
+                        </div>
+
+                        <?php if (!empty($config['body_bg_image']) && file_exists(__DIR__ . '/' . $config['body_bg_image'])): ?>
+                            <div style="margin: 0.8rem 0; padding: 0.6rem; background: white; border-radius: 8px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <img src="<?= htmlspecialchars($config['body_bg_image']) ?>" style="width: 55px; height: 35px; object-fit: cover; border-radius: 6px;">
+                                    <span style="font-size:0.85rem; color:#555;">Current Image</span>
+                                </div>
+                                <label style="font-size: 0.85rem; color: #d9534f; cursor:pointer; display:flex; align-items:center; gap:4px; margin-bottom:0;">
+                                    <input type="checkbox" name="remove_body_bg_image" value="1" style="width:auto;"> Remove
+                                </label>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                </div>
+                <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                    <button type="submit" name="update_theme" class="btn btn-primary" style="padding: 0.8rem 1.8rem; font-size: 1rem;">
+                        <i class="ph ph-floppy-disk"></i> Save Background Settings
+                    </button>
+                    <button type="submit" name="reset_white_theme" class="btn" style="background:#f1ece8; color:#333; padding: 0.8rem 1.4rem; font-size: 0.95rem;" onclick="return confirm('Sigurado ka bang nais mong ibalik sa Plain White theme ang menu?');">
+                        <i class="ph ph-arrow-counter-clockwise"></i> Reset to Plain White Theme
+                    </button>
+                </div>
             </form>
         </div>
 
@@ -295,6 +486,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_gallery'])) {
             
             var modal = document.getElementById('editModal');
             modal.style.display = 'flex';
+        }
+
+        // Keep color inputs and hex text inputs in sync
+        const heroColorPicker = document.querySelector('input[name=hero_bg_color]');
+        const heroColorText = document.getElementById('hero_color_text');
+        if (heroColorPicker && heroColorText) {
+            heroColorPicker.addEventListener('input', (e) => { heroColorText.value = e.target.value; });
+            heroColorText.addEventListener('input', (e) => { heroColorPicker.value = e.target.value; });
+        }
+
+        const bodyColorPicker = document.querySelector('input[name=body_bg_color]');
+        const bodyColorText = document.getElementById('body_color_text');
+        if (bodyColorPicker && bodyColorText) {
+            bodyColorPicker.addEventListener('input', (e) => { bodyColorText.value = e.target.value; });
+            bodyColorText.addEventListener('input', (e) => { bodyColorPicker.value = e.target.value; });
+        }
+
+        const footerColorPicker = document.querySelector('input[name=footer_bg_color]');
+        const footerColorText = document.getElementById('footer_color_text');
+        if (footerColorPicker && footerColorText) {
+            footerColorPicker.addEventListener('input', (e) => { footerColorText.value = e.target.value; });
+            footerColorText.addEventListener('input', (e) => { footerColorPicker.value = e.target.value; });
         }
     </script>
 </body>

@@ -5,9 +5,9 @@
         "category": "Specialty",
         "price": "\u20b1200",
         "description": "A delicious Dulce De Letche from Taza Brew Cafe.",
-        "image": "assets\/images\/1788615229_prod_logo.png",
+        "image": "assets/images/1788615229_prod_logo.png",
         "tags": [],
-        "is_available": false
+        "is_available": true
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@
         "category": "Specialty",
         "price": "\u20b1190",
         "description": "A delicious Barista Drink from Taza Brew Cafe.",
-        "image": "assets\/images\/1792073584_prod_MenuTaza.png",
+        "image": "assets/images/1790327437_prod_BARISTA DRINKS.png",
         "tags": [],
         "is_available": true
     },
@@ -25,8 +25,9 @@
         "category": "Specialty",
         "price": "\u20b1190",
         "description": "A delicious Almond Butter Latte from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327891_prod_ALMOND BUTTER LATTE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 4,
@@ -34,8 +35,9 @@
         "category": "Specialty",
         "price": "\u20b1180",
         "description": "A delicious Affogato Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327847_prod_AFFOGATO ALMOND FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 5,
@@ -43,8 +45,9 @@
         "category": "Specialty",
         "price": "\u20b1200",
         "description": "A delicious Coffee Jelly Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327414_prod_COFFEE JELLY FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 6,
@@ -52,8 +55,9 @@
         "category": "Specialty",
         "price": "\u20b1200",
         "description": "A delicious Macadamia Dream from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327913_prod_MACADAMIA DREAM.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 7,
@@ -61,8 +65,9 @@
         "category": "Specialty",
         "price": "\u20b1190",
         "description": "A delicious French Kiss from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327946_prod_FRENCH KISS.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 8,
@@ -70,35 +75,29 @@
         "category": "Specialty",
         "price": "\u20b1195",
         "description": "A delicious Signature Matcha Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
-    },
-    {
-        "id": 9,
-        "name": "Signature Mocha Frappe",
-        "category": "Specialty",
-        "price": "\u20b1200",
-        "description": "A delicious Signature Mocha Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327812_prod_SIGNATURE MATCHA FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 10,
         "name": "Americano",
         "category": "Coffee Base",
-        "price": "\u20b1140 (Iced) \/ \u20b1160 (Hot)",
+        "price": "\u20b1140 (Iced) / \u20b1160 (Hot)",
         "description": "A delicious Americano from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326638_prod_AMERICANO.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 11,
         "name": "Cloud Latte",
         "category": "Coffee Base",
-        "price": "\u20b1180 (Iced) \/ \u20b1185 (Hot)",
+        "price": "\u20b1180 (Iced) / \u20b1185 (Hot)",
         "description": "A delicious Cloud Latte from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326598_prod_CLOUD LATTE (1).png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 12,
@@ -106,8 +105,9 @@
         "category": "Coffee Base",
         "price": "\u20b1185",
         "description": "A delicious Caramel Macchiato from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326439_prod_CARAMEL MACCHIATO.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 13,
@@ -115,8 +115,9 @@
         "category": "Coffee Base",
         "price": "\u20b1185",
         "description": "A delicious Hazelnut Macchiato from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326364_prod_HAZELNUT MACCHIATO.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 14,
@@ -124,53 +125,59 @@
         "category": "Coffee Base",
         "price": "\u20b1185",
         "description": "A delicious Salted Caramel Latte from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326550_prod_SALTED CARAMEL LATTE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 15,
         "name": "Taza Latte",
         "category": "Coffee Base",
-        "price": "\u20b1185",
+        "price": "\u20b1165 (Iced) / \u20b1185 (Hot)",
         "description": "A delicious Taza Latte from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326517_prod_TAZA LATTE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 16,
         "name": "Cafe Matcha",
         "category": "Coffee Base",
-        "price": "\u20b1165 (Iced) \/ \u20b1180 (Hot)",
+        "price": "\u20b1165 (Iced) / \u20b1180 (Hot)",
         "description": "A delicious Cafe Matcha from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326669_prod_CAFE MATCHA.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 17,
         "name": "Spanish Latte",
         "category": "Coffee Base",
-        "price": "\u20b1180 (Iced) \/ \u20b1190 (Hot)",
+        "price": "\u20b1180 (Iced) / \u20b1190 (Hot)",
         "description": "A delicious Spanish Latte from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326482_prod_SPANISH LATTE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 18,
         "name": "Mocha Latte",
         "category": "Coffee Base",
-        "price": "\u20b1180 (Iced) \/ \u20b1190 (Hot)",
+        "price": "\u20b1180 (Iced) / \u20b1190 (Hot)",
         "description": "A delicious Mocha Latte from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326307_prod_MOCHA LATTE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 19,
         "name": "Chocolate Cookie Dough",
         "category": "Coffee Base",
-        "price": "\u20b1180 (Iced) \/ \u20b1190 (Hot)",
+        "price": "\u20b1180 (Iced) / \u20b1190 (Hot)",
         "description": "A delicious Chocolate Cookie Dough from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791622410_prod_CHOCOLATE COOKIE DOUGH.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 20,
@@ -178,8 +185,9 @@
         "category": "Non-Coffee",
         "price": "\u20b1180",
         "description": "A delicious Choco Mud from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791622458_prod_CHOCOMUD.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 21,
@@ -187,8 +195,9 @@
         "category": "Non-Coffee",
         "price": "\u20b1180",
         "description": "A delicious Nutty Mud from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790328324_prod_NUTTY MUD.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 22,
@@ -196,26 +205,29 @@
         "category": "Non-Coffee",
         "price": "\u20b1180",
         "description": "A delicious Strawberry Latte from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790328600_prod_STRAWBERRY LATTE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 23,
         "name": "Spanish Matcha",
         "category": "Non-Coffee",
-        "price": "\u20b1195",
+        "price": "\u20b1180",
         "description": "A delicious Spanish Matcha from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790328467_prod_SPANISH MATCHA.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 24,
         "name": "Strawberry Matcha",
         "category": "Non-Coffee",
-        "price": "\u20b1180",
+        "price": "\u20b1195",
         "description": "A delicious Strawberry Matcha from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791622273_prod_STRAWBERRY MATCHA.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 25,
@@ -223,8 +235,9 @@
         "category": "Non-Coffee",
         "price": "\u20b1180",
         "description": "A delicious Matcha Latte from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790328307_prod_MATCHA LATTE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 26,
@@ -232,8 +245,9 @@
         "category": "Non-Coffee",
         "price": "\u20b1130",
         "description": "A delicious Strawberry Kiss Soda from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790328403_prod_STRAWBERRY KISS SODA.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 27,
@@ -241,8 +255,9 @@
         "category": "Non-Coffee",
         "price": "\u20b1130",
         "description": "A delicious Green Apple Soda from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790328418_prod_GREEN APPLE SODA.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 28,
@@ -250,8 +265,9 @@
         "category": "Non-Coffee",
         "price": "\u20b1130",
         "description": "A delicious Blueberry Soda from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790328439_prod_BLUEBERRY SODA.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 29,
@@ -259,8 +275,9 @@
         "category": "Non-Coffee",
         "price": "\u20b1130",
         "description": "A delicious Lychee Soda from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790328579_prod_LYCHEE SODA.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 30,
@@ -268,8 +285,9 @@
         "category": "Ice Blend",
         "price": "\u20b1205",
         "description": "A delicious Red Mocha Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327160_prod_RED MOCHA FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 31,
@@ -277,8 +295,9 @@
         "category": "Ice Blend",
         "price": "\u20b1195",
         "description": "A delicious Mocha Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327201_prod_MOCHA FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 32,
@@ -286,8 +305,9 @@
         "category": "Ice Blend",
         "price": "\u20b1195",
         "description": "A delicious Dark Mocha Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327065_prod_DARK MOCHA FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 33,
@@ -295,8 +315,9 @@
         "category": "Ice Blend",
         "price": "\u20b1200",
         "description": "A delicious Caramel Macchiato Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327038_prod_CARAMEL MACCHIATO FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 34,
@@ -304,8 +325,9 @@
         "category": "Ice Blend",
         "price": "\u20b1195",
         "description": "A delicious Strawberries & Cream from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326990_prod_STRAWBERRIES AND CREAM.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 35,
@@ -313,8 +335,9 @@
         "category": "Ice Blend",
         "price": "\u20b1200",
         "description": "A delicious Java Chips Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326935_prod_JAVA CHIPS FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 36,
@@ -322,8 +345,9 @@
         "category": "Ice Blend",
         "price": "\u20b1200",
         "description": "A delicious Salted Caramel Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327136_prod_SALTED CARAMEL FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 37,
@@ -331,8 +355,9 @@
         "category": "Ice Blend",
         "price": "\u20b1190",
         "description": "A delicious Cookies & Cream Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327231_prod_COOKIES AND CREAM FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 38,
@@ -340,8 +365,9 @@
         "category": "Ice Blend",
         "price": "\u20b1190",
         "description": "A delicious Matcha Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790327102_prod_MATCHA FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 39,
@@ -349,8 +375,9 @@
         "category": "Ice Blend",
         "price": "\u20b1205",
         "description": "A delicious Biscoff Lotus Frappe from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326877_prod_BISCOFF LOTUS FRAPPE.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 40,
@@ -358,8 +385,9 @@
         "category": "Ice Blend",
         "price": "\u20b1195",
         "description": "A delicious Blueberries & Cream from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1790326908_prod_BLUEBERRIES AND CREAM.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 41,
@@ -367,8 +395,9 @@
         "category": "Rice Meal",
         "price": "\u20b1205",
         "description": "A delicious Terriyaki Chicken Pops from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791621696_prod_teriyaki.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 42,
@@ -376,8 +405,9 @@
         "category": "Rice Meal",
         "price": "\u20b1215",
         "description": "A delicious Pork Terriyaki from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791621733_prod_pork teriyaki.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 43,
@@ -385,8 +415,9 @@
         "category": "Rice Meal",
         "price": "\u20b1205",
         "description": "A delicious White Chicken Pops from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791622582_prod_white chicken pop.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 44,
@@ -394,8 +425,9 @@
         "category": "Rice Meal",
         "price": "\u20b1215",
         "description": "A delicious Breaded Chicken from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791621921_prod_breaded chicken.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 45,
@@ -403,7 +435,7 @@
         "category": "Rice Meal",
         "price": "\u20b1215",
         "description": "A delicious Breaded Pork from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
+        "image": "assets/images/default.png",
         "tags": []
     },
     {
@@ -412,8 +444,9 @@
         "category": "Rice Meal",
         "price": "\u20b1205",
         "description": "A delicious Hungarian Sausage from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791621975_prod_hungarian.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 47,
@@ -421,7 +454,7 @@
         "category": "Rice Meal",
         "price": "\u20b1215",
         "description": "A delicious Chicken Cheese Pops from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
+        "image": "assets/images/default.png",
         "tags": []
     },
     {
@@ -430,8 +463,9 @@
         "category": "Rice Meal",
         "price": "\u20b1215",
         "description": "A delicious Pork Cheesy Breaded from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791622090_prod_pork cheesy.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 49,
@@ -439,8 +473,9 @@
         "category": "Rice Meal",
         "price": "\u20b1210",
         "description": "A delicious Beefy Mushroom from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791622143_prod_beefy mushroom.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 50,
@@ -448,8 +483,9 @@
         "category": "Rice Meal",
         "price": "\u20b1210",
         "description": "A delicious Buttered Chicken Parmesan from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791621854_prod_buttered chicken.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 51,
@@ -457,8 +493,9 @@
         "category": "Rice Meal",
         "price": "\u20b1220",
         "description": "A delicious Sisig Supreme from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791621634_prod_sisig.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 52,
@@ -466,8 +503,9 @@
         "category": "Pasta",
         "price": "\u20b1215",
         "description": "A delicious Carbonara Pasta from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791621139_prod_sadas.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 53,
@@ -475,8 +513,9 @@
         "category": "Pasta",
         "price": "\u20b1215",
         "description": "A delicious Tuna Carbonara Pasta from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791621274_prod_tuna.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 54,
@@ -484,8 +523,9 @@
         "category": "Pasta",
         "price": "\u20b1245",
         "description": "A delicious Cheesy Fettucine Pasta from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791621336_prod_cheesy.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 55,
@@ -493,25 +533,7 @@
         "category": "Pasta",
         "price": "\u20b1250",
         "description": "A delicious Chicken Aglio Olio from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
-    },
-    {
-        "id": 56,
-        "name": "Fresco Fries",
-        "category": "Snacks",
-        "price": "\u20b1140",
-        "description": "A delicious Fresco Fries from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
-    },
-    {
-        "id": 57,
-        "name": "Fresco Chicken Burger",
-        "category": "Snacks",
-        "price": "\u20b1160",
-        "description": "A delicious Fresco Chicken Burger from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
+        "image": "assets/images/default.png",
         "tags": []
     },
     {
@@ -520,8 +542,9 @@
         "category": "Snacks",
         "price": "\u20b1155",
         "description": "A delicious Fresco Beefy Burger from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
-        "tags": []
+        "image": "assets/images/1791618506_prod_beefy.png",
+        "tags": [],
+        "is_available": true
     },
     {
         "id": 59,
@@ -529,7 +552,7 @@
         "category": "Pastries",
         "price": "\u20b190",
         "description": "A delicious Brick Brownies from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
+        "image": "assets/images/default.png",
         "tags": []
     },
     {
@@ -538,7 +561,7 @@
         "category": "Pastries",
         "price": "\u20b1130",
         "description": "A delicious Chocolate Chip Cookies from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
+        "image": "assets/images/default.png",
         "tags": []
     },
     {
@@ -547,7 +570,7 @@
         "category": "Pastries",
         "price": "\u20b1130",
         "description": "A delicious Belgian Waffle from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
+        "image": "assets/images/default.png",
         "tags": []
     },
     {
@@ -556,7 +579,7 @@
         "category": "Pastries",
         "price": "\u20b1140",
         "description": "A delicious Creamy Spinach Flatbread from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
+        "image": "assets/images/default.png",
         "tags": []
     },
     {
@@ -565,7 +588,61 @@
         "category": "Pastries",
         "price": "\u20b1180",
         "description": "A delicious Elena Cheesecake from Taza Brew Cafe.",
-        "image": "assets\/images\/default.png",
+        "image": "assets/images/default.png",
         "tags": []
+    },
+    {
+        "id": 64,
+        "name": "Fresco Chicken Burger",
+        "category": "Snacks",
+        "price": "160",
+        "description": "A delicious Dulce De Letche from Taza Brew Cafe.",
+        "image": "assets/images/1791618714_prod_chicken burger.png",
+        "tags": [],
+        "is_available": true
+    },
+    {
+        "id": 65,
+        "name": "Fresco Fries",
+        "category": "Snacks",
+        "price": "140",
+        "description": "from Taza Brew Cafe.",
+        "image": "assets/images/1791621042_prod_fries.png",
+        "tags": [],
+        "is_available": true
+    },
+    {
+        "id": 66,
+        "name": "Burnt Latte",
+        "category": "Specialty",
+        "price": "200",
+        "description": ".",
+        "image": "assets/images/1792331535_prod_936.jpg",
+        "tags": [
+            "."
+        ],
+        "is_available": true
+    },
+    {
+        "id": 68,
+        "name": "Signature Mocha",
+        "category": "Specialty",
+        "price": "200",
+        "description": ".",
+        "image": "assets/images/1792331780_prod_936.jpg",
+        "tags": [
+            "."
+        ],
+        "is_available": true
+    },
+    {
+        "id": 69,
+        "name": "Salted Matcha",
+        "category": "Non-Coffee",
+        "price": "\u20b1180",
+        "description": "A delicious Salted Matcha from Taza Brew Cafe.",
+        "image": "assets/images/1793264967_prod_download.png",
+        "tags": [],
+        "is_available": true
     }
 ]

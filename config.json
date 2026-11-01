@@ -1,3 +1,10 @@
 {
-    "mode": "interactive"
+    "mode": "interactive",
+    "body_bg_color": "#fafafa",
+    "body_bg_image": "assets\/images\/body_bg_1793529110.png",
+    "hero_bg_color": "#8c5f4d",
+    "hero_bg_image": "assets\/images\/hero_bg_1793527646.png",
+    "footer_bg_color": "#f3ede8",
+    "footer_bg_image": "",
+    "body_bg_fit": "cover"
 }

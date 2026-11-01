@@ -1,37 +1,70 @@
-// Filter Logic
+// Search & Filter Logic
 const filterBtns = document.querySelectorAll('.filter-btn');
 const menuCards = document.querySelectorAll('.menu-card');
+const searchInput = document.getElementById('menuSearchInput');
+const clearSearchBtn = document.getElementById('clearSearchBtn');
+const noResultsMessage = document.getElementById('noResultsMessage');
+
+let currentFilter = 'all';
+let currentSearch = '';
+
+function applyFilterAndSearch() {
+    let visibleCount = 0;
+
+    menuCards.forEach(card => {
+        const category = card.getAttribute('data-category') || '';
+        const name = card.getAttribute('data-name') || '';
+        const desc = card.getAttribute('data-description') || '';
+
+        const matchesCategory = (currentFilter === 'all' || category === currentFilter);
+        const matchesSearch = !currentSearch || name.includes(currentSearch) || desc.includes(currentSearch);
+
+        if (matchesCategory && matchesSearch) {
+            card.style.display = 'flex';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    if (noResultsMessage) {
+        noResultsMessage.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+}
 
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        // Remove active class from all
         filterBtns.forEach(b => b.classList.remove('active'));
-        // Add to clicked
         btn.classList.add('active');
-
-        const filterValue = btn.getAttribute('data-filter');
-
-        menuCards.forEach(card => {
-            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                card.style.display = 'flex';
-                // Slight animation
-                card.style.opacity = '0';
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.4s ease';
-                    card.style.opacity = '1';
-                }, 50);
-            } else {
-                card.style.display = 'none';
-            }
-        });
+        currentFilter = btn.getAttribute('data-filter') || 'all';
+        applyFilterAndSearch();
     });
 });
+
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value.trim().toLowerCase();
+        if (clearSearchBtn) {
+            clearSearchBtn.style.display = currentSearch.length > 0 ? 'flex' : 'none';
+        }
+        applyFilterAndSearch();
+    });
+}
+
+if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        currentSearch = '';
+        clearSearchBtn.style.display = 'none';
+        applyFilterAndSearch();
+        if (searchInput) searchInput.focus();
+    });
+}
 
 // Modal Logic
 const modal = document.getElementById('itemModal');
 const modalImage = document.getElementById('modalImage');
 const modalName = document.getElementById('modalName');
-const modalPrice = document.getElementById('modalPrice');
 const modalDescription = document.getElementById('modalDescription');
 const modalTags = document.getElementById('modalTags');
 
@@ -44,20 +77,8 @@ let touchEndY = 0;
 let currentModalItem = null;
 let currentModalQty = 1;
 
-// Cart State (stored in localStorage for seamless experience)
+// Cart State (Order list of selected items)
 let cart = JSON.parse(localStorage.getItem('taza_cart') || '[]');
-
-function parsePrice(priceStr) {
-    if (typeof priceStr === 'number') return priceStr;
-    if (!priceStr) return 0;
-    // Strip peso symbol and commas
-    const cleaned = priceStr.replace(/[^0-9.]/g, '');
-    return parseFloat(cleaned) || 0;
-}
-
-function formatPrice(amount) {
-    return '₱' + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
 
 function saveCart() {
     localStorage.setItem('taza_cart', JSON.stringify(cart));
@@ -67,23 +88,16 @@ function saveCart() {
 function updateCartUI() {
     const floatingCart = document.getElementById('floatingCart');
     const cartBadge = document.getElementById('cartItemCount');
-    const cartBarTotal = document.getElementById('cartBarTotal');
-    const cartGrandTotal = document.getElementById('cartGrandTotal');
     const cartItemsList = document.getElementById('cartItemsList');
 
     if (!floatingCart) return;
 
     let totalQty = 0;
-    let grandTotal = 0;
-
     cart.forEach(item => {
         totalQty += item.qty;
-        grandTotal += item.price * item.qty;
     });
 
-    cartBadge.textContent = totalQty;
-    cartBarTotal.textContent = formatPrice(grandTotal);
-    if (cartGrandTotal) cartGrandTotal.textContent = formatPrice(grandTotal);
+    if (cartBadge) cartBadge.textContent = totalQty;
 
     if (totalQty > 0) {
         floatingCart.classList.add('visible');
@@ -91,32 +105,47 @@ function updateCartUI() {
         floatingCart.classList.remove('visible');
     }
 
-    // Populate drawer list
+    // Populate order list with product image
     if (cartItemsList) {
         if (cart.length === 0) {
             cartItemsList.innerHTML = `
                 <div class="cart-empty-message">
                     <i class="ph ph-shopping-bag" style="font-size: 2.5rem; display:block; margin-bottom: 8px; opacity: 0.5;"></i>
-                    Your order is empty.<br>Choose items from the menu to get started!
+                    Your order list is empty.<br>Choose items from the menu to add!
                 </div>
             `;
         } else {
-            cartItemsList.innerHTML = cart.map(item => `
-                <div class="cart-item-row">
-                    <div class="cart-item-info">
-                        <div class="cart-item-title">${item.name}</div>
-                        <div class="cart-item-unit-price">${formatPrice(item.price)} each</div>
-                    </div>
-                    <div class="cart-item-controls">
-                        <div class="cart-qty-ctrl">
-                            <button class="cart-qty-btn" onclick="updateCartItemQty(${item.id}, -1)">-</button>
-                            <span class="cart-item-qty">${item.qty}</span>
-                            <button class="cart-qty-btn" onclick="updateCartItemQty(${item.id}, 1)">+</button>
+            cartItemsList.innerHTML = cart.map(item => {
+                // Find matching item in menuData to ensure updated image
+                const matched = (typeof menuData !== 'undefined') ? menuData.find(m => m.id === item.id) : null;
+                const imgPath = (matched && matched.image) ? matched.image : (item.image || '');
+                const hasValidImg = imgPath && !imgPath.includes('default.png');
+                
+                const imgHtml = hasValidImg
+                    ? `<img src="${imgPath}" alt="${item.name}" class="cart-item-thumb">`
+                    : `<div class="cart-item-thumb-placeholder">☕</div>`;
+
+                return `
+                    <div class="cart-item-row">
+                        <div class="cart-item-media">
+                            ${imgHtml}
                         </div>
-                        <div class="cart-item-subtotal">${formatPrice(item.price * item.qty)}</div>
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <div class="cart-qty-ctrl">
+                                <button class="cart-qty-btn" onclick="updateCartItemQty(${item.id}, -1)">-</button>
+                                <span class="cart-item-qty">${item.qty}</span>
+                                <button class="cart-qty-btn" onclick="updateCartItemQty(${item.id}, 1)">+</button>
+                            </div>
+                            <button class="cart-del-btn" style="background:none;border:none;color:#d9534f;cursor:pointer;font-size:1.1rem;padding:4px;" onclick="removeCartItem(${item.id})" title="Remove item">
+                                <i class="ph ph-trash"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
     }
 }
@@ -131,16 +160,19 @@ function addCurrentItemToCart() {
     if (!currentModalItem) return;
     
     const existingIndex = cart.findIndex(i => i.id === currentModalItem.id);
-    const priceNum = parsePrice(currentModalItem.price);
 
     if (existingIndex > -1) {
         cart[existingIndex].qty += currentModalQty;
+        // ensure image is stored
+        if (currentModalItem.image) {
+            cart[existingIndex].image = currentModalItem.image;
+        }
     } else {
         cart.push({
             id: currentModalItem.id,
             name: currentModalItem.name,
-            price: priceNum,
-            qty: currentModalQty
+            qty: currentModalQty,
+            image: currentModalItem.image || ''
         });
     }
 
@@ -159,6 +191,14 @@ function updateCartItemQty(id, delta) {
     }
 }
 
+function removeCartItem(id) {
+    const itemIndex = cart.findIndex(i => i.id === id);
+    if (itemIndex > -1) {
+        cart.splice(itemIndex, 1);
+        saveCart();
+    }
+}
+
 function clearCart() {
     if (confirm('Are you sure you want to clear your order?')) {
         cart = [];
@@ -167,19 +207,7 @@ function clearCart() {
 }
 
 function promptCustomerBill() {
-    if (cart.length === 0) {
-        alert('Your order list is empty.');
-        return;
-    }
-    let summary = "📋 TAZA BREW CAFE ORDER:\\n\\n";
-    let grandTotal = 0;
-    cart.forEach(i => {
-        const sub = i.price * i.qty;
-        grandTotal += sub;
-        summary += `• ${i.qty}x ${i.name} - ${formatPrice(sub)}\\n`;
-    });
-    summary += `\\nTOTAL: ${formatPrice(grandTotal)}\\n\\nPlease present this to the cashier/counter to place your order. Thank you!`;
-    alert(summary);
+    // No popup alert needed, Pay at the Counter is displayed directly
 }
 
 // Cart Drawer / Modal open & close
@@ -244,7 +272,8 @@ function openModal(id) {
         modalImage.src = item.image;
     }
     modalName.textContent = item.name;
-    modalPrice.textContent = item.price;
+    const modalPriceElem = document.getElementById('modalPrice');
+    if (modalPriceElem) modalPriceElem.textContent = item.price;
     modalDescription.textContent = item.description;
     
     // Populate tags
@@ -267,7 +296,7 @@ function openModal(id) {
 }
 
 function closeModal(fromHistory = false) {
-    if (!modal.classList.contains('active')) return;
+    if (!modal || !modal.classList.contains('active')) return;
     
     modal.classList.remove('active');
     document.body.style.overflow = ''; 
@@ -298,13 +327,30 @@ modal.addEventListener('click', (e) => {
 const modalContent = document.querySelector('.modal-content');
 if (modalContent) {
     modalContent.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
+        if (!e.touches || e.touches.length === 0) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
     }, { passive: true });
 
+    modalContent.addEventListener('touchmove', (e) => {
+        // If swiping horizontally across the modal, prevent Chrome/browser default back-forward swipe
+        if (!e.touches || e.touches.length === 0) return;
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const deltaX = Math.abs(currentX - touchStartX);
+        const deltaY = Math.abs(currentY - touchStartY);
+
+        if (deltaX > deltaY && deltaX > 15) {
+            if (e.cancelable) {
+                e.preventDefault();
+            }
+        }
+    }, { passive: false });
+
     modalContent.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].clientY;
         handleSwipeGesture();
     }, { passive: true });
 }
@@ -313,9 +359,11 @@ function handleSwipeGesture() {
     const diffX = touchEndX - touchStartX;
     const diffY = touchEndY - touchStartY;
 
-    if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY)) {
+    // Horizontal swipe left or right (more than 50px)
+    if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
         closeModal();
-    } else if (diffY > 80 && modalContent.scrollTop <= 0) {
+    } else if (diffY > 70 && modalContent && modalContent.scrollTop <= 0) {
+        // Pull down gesture
         closeModal();
     }
 }
